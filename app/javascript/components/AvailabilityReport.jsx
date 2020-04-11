@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import { Typography, Form, Input, Select, Button, Row, Col, Space } from 'antd';
+import { Typography, Divider, Form, Input, Select, Button, Row, Col, Space } from 'antd';
 import { MinusCircleTwoTone, PlusOutlined } from '@ant-design/icons';
 
 import EssentialsSelect, { useItems } from './EssentialsSelect';
@@ -23,20 +23,20 @@ const AvailabilityReport = () => {
   const items = useItems();
 
   const onFinishHander = useCallback((values) => {
-    // console.debug('onFinish');
-    // fetch('/api/v1/reports', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Content-Type': 'application/json'
-    //   },
-    //   body: JSON.stringify(form.getFieldsValue(true)) 
-    // })
-    // .then(res => res.json())
-    // .then(res => {
+    console.debug('onFinish');
+    fetch('/api/v1/reports', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(form.getFieldsValue(true)) 
+    })
+    .then(res => res.json())
+    .then(res => {
       console.debug({ res });
-      // form.resetFields();
-    // })
+      form.resetFields();
+    })
   }, []);
 
   useEffect(() => {
@@ -58,6 +58,7 @@ const AvailabilityReport = () => {
       <div className="AvailabilityReport__container">
         <Title level={4}>Report Essential Goods Availability</Title>
         <Paragraph>Help everyone by reporting availability of essential goods when you shop.</Paragraph>
+        <Divider />
         <Form 
           form={form} 
           name="availibility-report" 
